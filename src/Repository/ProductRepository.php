@@ -48,6 +48,12 @@ class ProductRepository implements ProductProvider, ProductService
         return $product;
     }
 
+    public function update(Product $product): void
+    {
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+    }
+
     public function remove(string $id): void
     {
         $product = $this->repository->find($id);

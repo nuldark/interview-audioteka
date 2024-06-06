@@ -5,6 +5,13 @@ Content-Type: application/x-www-form-urlencoded
 
 name=Example product 0&price=1200
 
+### Update product
+
+PATCH https://localhost/products/2234d96c-ef71-4f94-a02a-2e513ddfc469/update
+Content-Type: application/x-www-form-urlencoded
+
+name=Example product&price=1300
+
 ### Remove product from catalog
 
 DELETE https://localhost/products/ec0c615d-0571-4e4b-9582-59a7edaf8117
@@ -21,7 +28,7 @@ POST https://localhost/cart
 
 ### Add product to cart
 
-PUT https://localhost/cart/{{cart_id}}/c9c74236-7545-4c4c-a877-0561b67d0618
+PUT https://localhost/cart/{{cart_id}}/119435f1-b1e7-43bd-9d87-5f06f32da67f
 
 ### Remove product from cart
 

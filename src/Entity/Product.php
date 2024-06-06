@@ -36,8 +36,30 @@ class Product implements \App\Service\Catalog\Product
         return $this->name;
     }
 
+    /**
+     * Sets name of the product.
+     *
+     * @param non-empty-string $name
+     * @return $this
+     */
+    public function setName(string $name): self {
+        $this->name = $name;
+        return $this;
+    }
+
     public function getPrice(): int
     {
         return $this->priceAmount;
+    }
+
+    /**
+     * Sets price of the product.
+     *
+     * @param int $price
+     * @return $this
+     */
+    public function setPrice(int $price): self {
+        $this->priceAmount = $price;
+        return $this;
     }
 }
