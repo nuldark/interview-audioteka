@@ -19,11 +19,15 @@ class Product implements \App\Service\Catalog\Product
     #[ORM\Column(type: 'integer', nullable: false)]
     private string $priceAmount;
 
+    #[ORM\Column(type: 'datetime', nullable: false)]
+    private \DateTimeInterface $createdAt;
+
     public function __construct(string $id, string $name, int $price)
     {
         $this->id = Uuid::fromString($id);
         $this->name = $name;
         $this->priceAmount = $price;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): string
@@ -60,6 +64,26 @@ class Product implements \App\Service\Catalog\Product
      */
     public function setPrice(int $price): self {
         $this->priceAmount = $price;
+        return $this;
+    }
+
+    /**
+     * Gets the created date of the product.
+     *
+     * @return \DateTimeInterface
+     */
+    public function getCreatedAt(): \DateTimeInterface {
+        return $this->createdAt;
+    }
+
+    /**
+     * Sets created date of the product.
+     *
+     * @param \DateTimeInterface $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(\DateTimeInterface $createdAt): self {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

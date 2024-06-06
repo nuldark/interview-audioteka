@@ -3,14 +3,14 @@
 POST https://localhost/products
 Content-Type: application/x-www-form-urlencoded
 
-name=Example product 0&price=1200
+name=Example product 2&price=1200
 
 ### Update product
 
 PATCH https://localhost/products/2234d96c-ef71-4f94-a02a-2e513ddfc469/update
 Content-Type: application/x-www-form-urlencoded
 
-name=Example product&price=1300
+name=Example product&price=13003
 
 ### Remove product from catalog
 
