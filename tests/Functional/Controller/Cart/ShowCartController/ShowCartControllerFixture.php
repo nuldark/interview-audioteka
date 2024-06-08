@@ -29,7 +29,6 @@ class ShowCartControllerFixture extends AbstractFixture
         }
 
         $manager->persist($cart);
-
         $manager->flush();
     }
 }

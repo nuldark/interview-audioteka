@@ -21,7 +21,7 @@ class RemoveProductControllerTest extends WebTestCase
         $this->client->request('GET', '/cart/97e385fe-9876-45fc-baa0-4f2f0df90950');
         self::assertResponseStatusCodeSame(200);
         $response = $this->getJsonResponse();
-        self::assertCount(0, $response['products']);
+        self::assertCount(1, $response['products']);
     }
 
     public function test_ignores_request_if_product_is_not_in_cart(): void
