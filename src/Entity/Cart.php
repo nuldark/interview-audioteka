@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use function array_reduce;
 
 #[ORM\Entity]
 class Cart implements \App\Service\Cart\Cart
@@ -32,30 +32,29 @@ class Cart implements \App\Service\Cart\Cart
         return $this->id->toString();
     }
 
-    public function getProducts(): array {
-        return $this->products->toArray();
-    }
-
-    public function addProduct(Product $product, int $amount = 1): self {
+    public function addProduct(Product $product, int $amount = 1): self
+    {
         $this->products->add(new CartProduct($this, $product, $amount));
         return $this;
     }
 
-    public function removeProduct(Product $product, int $amount = 1): self {
+    public function removeProduct(Product $product, int $amount = 1): self
+    {
         $this->products
-            ->filter(static fn (CartProduct $cartProduct) => $cartProduct->equals($product))
+            ->filter(static fn(CartProduct $cartProduct) => $cartProduct->equals($product))
             ->map(function (CartProduct $cartProduct) use ($amount) {
-               $cartProduct->setAmount($cartProduct->getAmount() - $amount);
+                $cartProduct->setAmount($cartProduct->getAmount() - $amount);
 
-               if ($cartProduct->getAmount() === 0) {
-                   $this->products->removeElement($cartProduct);
-               }
+                if ($cartProduct->getAmount() === 0) {
+                    $this->products->removeElement($cartProduct);
+                }
             });
 
         return $this;
     }
 
-    public function hasProduct(Product $product): bool {
+    public function hasProduct(Product $product): bool
+    {
         foreach ($this->products as $cartProduct) {
             if ($cartProduct->equals($product)) {
                 return true;
@@ -65,20 +64,27 @@ class Cart implements \App\Service\Cart\Cart
         return false;
     }
 
-    public function getTotalPrice(): int {
-        return \array_reduce(
+    public function getTotalPrice(): int
+    {
+        return array_reduce(
             $this->getProducts(),
-            static fn (int $total, CartProduct $cartProduct) => $total + ($cartProduct->getProduct()->getPrice() * $cartProduct->getAmount()),
+            static fn(int $total, CartProduct $cartProduct) => $total + ($cartProduct->getProduct()->getPrice() * $cartProduct->getAmount()),
             0
         );
     }
 
-    public function isFull(?int $amount = null): bool {
-        return \array_reduce(
-            $this->getProducts(),
-            static fn (int $total, CartProduct $cartProduct) => $total + $cartProduct->getAmount(),
-            0
-        ) + $amount > self::CAPACITY;
+    public function getProducts(): array
+    {
+        return $this->products->toArray();
+    }
+
+    public function isFull(?int $amount = null): bool
+    {
+        return array_reduce(
+                $this->getProducts(),
+                static fn(int $total, CartProduct $cartProduct) => $total + $cartProduct->getAmount(),
+                0
+            ) + $amount > self::CAPACITY;
     }
 
 }

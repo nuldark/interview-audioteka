@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UnexpectedValueException;
 
 #[ORM\Entity]
 class CartProduct implements \App\Service\CartProduct\CartProduct
@@ -23,19 +24,11 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
     #[ORM\Column(type: 'integer')]
     private int $amount = 1;
 
-    public function __construct(Cart $cart, Product $product, int $amount) {
+    public function __construct(Cart $cart, Product $product, int $amount)
+    {
         $this->cart = $cart;
         $this->product = $product;
         $this->amount = $amount;
-    }
-
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function setId(int $id): self {
-        $this->id = $id;
-        return $this;
     }
 
     public function getCart(): Cart
@@ -43,18 +36,9 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
         return $this->cart;
     }
 
-    public function setCart(Cart $cart): self {
-        $this->cart = $cart;
-        return $this;
-    }
-
-    public function getProduct(): Product
+    public function setCart(Cart $cart): self
     {
-        return $this->product;
-    }
-
-    public function setProduct(Product $product): self {
-        $this->product = $product;
+        $this->cart = $cart;
         return $this;
     }
 
@@ -63,16 +47,40 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
         return $this->amount;
     }
 
-    public function setAmount(int $amount): self {
+    public function setAmount(int $amount): self
+    {
         if ($amount < 0) {
-            throw new \UnexpectedValueException("Amount must be greater than 0");
+            throw new UnexpectedValueException("Amount must be greater than 0");
         }
 
         $this->amount = $amount;
         return $this;
     }
 
-    public function equals(Product $product): bool {
+    public function equals(Product $product): bool
+    {
         return $product->getId() === $this->getProduct()->getId();
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getProduct(): Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(Product $product): self
+    {
+        $this->product = $product;
+        return $this;
     }
 }

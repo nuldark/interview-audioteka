@@ -7,7 +7,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProductListBuilder
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator) { }
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    {
+    }
 
     /**
      * @param Product[] $products

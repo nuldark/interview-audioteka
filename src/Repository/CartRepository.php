@@ -7,13 +7,17 @@ use App\Entity\Product;
 use App\Service\Cart\Cart;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Ramsey\Uuid\Uuid;
 
 class CartRepository implements CartService
 {
-    public function __construct(private EntityManagerInterface $entityManager) {}
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
-    public function getProducts(string $cartId): array {
+    public function getProducts(string $cartId): array
+    {
         return $this->entityManager->getRepository(CartProduct::class)
             ->findBy(['cart' => $cartId]);
     }
@@ -21,7 +25,7 @@ class CartRepository implements CartService
     public function addProduct(string $cartId, string $productId, int $amount): void
     {
         $cart = $this->entityManager->find(\App\Entity\Cart::class, $cartId);
-        $product = $this->entityManager->find(\App\Entity\Product::class, $productId);
+        $product = $this->entityManager->find(Product::class, $productId);
 
         if ($cart && $product) {
             $cartProduct = $this->entityManager->getRepository(CartProduct::class)
@@ -34,7 +38,7 @@ class CartRepository implements CartService
             $cartProduct->setAmount($amount);
 
             if ($cart->isFull()) {
-                throw new \Exception('Cart is full.');
+                throw new Exception('Cart is full.');
             }
 
             $this->entityManager->persist($cartProduct);
@@ -45,7 +49,7 @@ class CartRepository implements CartService
     public function removeProduct(string $cartId, string $productId, int $amount): void
     {
         $cart = $this->entityManager->find(\App\Entity\Cart::class, $cartId);
-        $product = $this->entityManager->find(\App\Entity\Product::class, $productId);
+        $product = $this->entityManager->find(Product::class, $productId);
 
         if ($cart->hasProduct($product)) {
             $cart->removeProduct($product, $amount);

@@ -4,7 +4,6 @@ namespace App\Tests\Unit\ResponseBuilder;
 
 use App\Entity\Product;
 use App\ResponseBuilder\ProductListBuilder;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -21,7 +20,7 @@ class ProductListBuilderTest extends TestCase
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator->method('generate')->willReturnCallback(
-            fn(string $name, array $parameters): string => $name.json_encode($parameters, JSON_THROW_ON_ERROR)
+            fn(string $name, array $parameters): string => $name . json_encode($parameters, JSON_THROW_ON_ERROR)
         );
 
         $this->builder = new ProductListBuilder($urlGenerator);

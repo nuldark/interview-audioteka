@@ -25,8 +25,7 @@ class ProductRepository implements ProductProvider, ProductService
             ->setMaxResults($count)
             ->setFirstResult($page * $count)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function getTotalCount(): int

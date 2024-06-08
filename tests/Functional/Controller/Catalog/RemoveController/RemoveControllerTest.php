@@ -15,7 +15,7 @@ class RemoveControllerTest extends WebTestCase
 
     public function test_removes_product(): void
     {
-        $this->client->request('DELETE', '/products/'.RemoveControllerFixture::PRODUCT_ID);
+        $this->client->request('DELETE', '/products/' . RemoveControllerFixture::PRODUCT_ID);
 
         self::assertResponseStatusCodeSame(202);
 

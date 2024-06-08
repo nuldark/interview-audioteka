@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function trim;
 
 #[Route(
     path: '/products/{product}/update',
@@ -24,13 +25,15 @@ class UpdateController extends AbstractController implements MessageBusAwareInte
 
     public function __construct(
         private readonly ErrorBuilder $errorBuilder
-    ) {
+    )
+    {
 
     }
 
-    public function __invoke(Product $product, Request $request): Response {
+    public function __invoke(Product $product, Request $request): Response
+    {
         if ($request->request->has('name')) {
-            $name = \trim($request->get('name'));
+            $name = trim($request->get('name'));
             if ($name === '') {
                 return new JsonResponse(
                     $this->errorBuilder->__invoke('Invalid name, cannot be empty'),
@@ -42,11 +45,11 @@ class UpdateController extends AbstractController implements MessageBusAwareInte
         }
 
         if ($request->request->has('price')) {
-            $price = (int) $request->get('price');
+            $price = (int)$request->get('price');
             if ($price < 0) {
                 return new JsonResponse(
-                  $this->errorBuilder->__invoke('Invalid price, must be greater than zero.'),
-                  Response::HTTP_UNPROCESSABLE_ENTITY,
+                    $this->errorBuilder->__invoke('Invalid price, must be greater than zero.'),
+                    Response::HTTP_UNPROCESSABLE_ENTITY,
                 );
             }
 

@@ -6,13 +6,6 @@ use App\Tests\Functional\WebTestCase;
 
 class RemoveProductControllerTest extends WebTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->loadFixtures(new RemoveProductControllerFixture());
-    }
-
     public function test_removes_product_form_cart(): void
     {
         $this->client->request('DELETE', '/cart/97e385fe-9876-45fc-baa0-4f2f0df90950/d11e1e69-cca7-40a1-8273-9d93c8346efd');
@@ -50,5 +43,12 @@ class RemoveProductControllerTest extends WebTestCase
     {
         $this->client->request('DELETE', '/cart/46750c8e-41fe-4046-b237-8867cdb62a75/d11e1e69-cca7-40a1-8273-9d93c8346efd');
         self::assertResponseStatusCodeSame(404);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loadFixtures(new RemoveProductControllerFixture());
     }
 }

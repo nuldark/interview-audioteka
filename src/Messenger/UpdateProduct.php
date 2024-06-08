@@ -8,7 +8,8 @@ final class UpdateProduct
 {
     public function __construct(
         public readonly Product $product
-    ) {
+    )
+    {
 
     }
 }

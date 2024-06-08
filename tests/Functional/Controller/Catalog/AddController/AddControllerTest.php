@@ -18,7 +18,7 @@ class AddControllerTest extends WebTestCase
 
         $this->client->request('GET', '/products');
         self::assertResponseStatusCodeSame(200);
-        
+
         $response = $this->getJsonResponse();
         self::assertCount(1, $response['products']);
         self::assertequals('Product name', $response['products'][0]['name']);

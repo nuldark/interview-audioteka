@@ -7,13 +7,11 @@ use App\Entity\Product;
 use App\Messenger\AddProductToCart;
 use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
-use App\Repository\CartRepository;
 use App\ResponseBuilder\ErrorBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/cart/{cart}/{product}", methods={"PUT"}, name="cart-add-product")
@@ -24,11 +22,13 @@ class AddProductController extends AbstractController implements MessageBusAware
 
     public function __construct(
         private ErrorBuilder $errorBuilder,
-    ) { }
+    )
+    {
+    }
 
     public function __invoke(Request $request, Cart $cart, Product $product): Response
     {
-        $amount = (int) $request->get('amount', 1);
+        $amount = (int)$request->get('amount', 1);
 
         if ($cart->isFull($amount)) {
             return new JsonResponse(

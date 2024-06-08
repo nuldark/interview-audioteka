@@ -6,13 +6,6 @@ use App\Tests\Functional\WebTestCase;
 
 class ShowCartControllerTest extends WebTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->loadFixtures(new ShowCartControllerFixture());
-    }
-
     public function test_shows_cart(): void
     {
         $this->client->request('GET', '/cart/fab8f7c3-a641-43c1-92d3-ee871a55fa8a');
@@ -49,5 +42,12 @@ class ShowCartControllerTest extends WebTestCase
     {
         $this->client->request('GET', '/cart/2d6b5d93-e1fd-4f69-8293-832497be09cd');
         self::assertResponseStatusCodeSame(404);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loadFixtures(new ShowCartControllerFixture());
     }
 }

@@ -8,7 +8,6 @@ use App\Messenger\MessageBusTrait;
 use App\Messenger\RemoveProductFromCatalog;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/products/{product}", methods={"DELETE"}, name="product-delete")
@@ -22,7 +21,7 @@ class RemoveController extends AbstractController implements MessageBusAwareInte
         if ($product !== null) {
             $this->dispatch(new RemoveProductFromCatalog($product->getId()));
         }
-        
+
         return new Response('', Response::HTTP_ACCEPTED);
     }
 }

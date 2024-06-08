@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/products", methods={"GET"}, name="product-list")
@@ -17,7 +16,9 @@ class ListController extends AbstractController
 {
     private const MAX_PER_PAGE = 3;
 
-    public function __construct(private ProductProvider $productProvider, private ProductListBuilder $productListBuilder) { }
+    public function __construct(private ProductProvider $productProvider, private ProductListBuilder $productListBuilder)
+    {
+    }
 
     public function __invoke(Request $request): Response
     {

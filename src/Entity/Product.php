@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -20,14 +22,14 @@ class Product implements \App\Service\Catalog\Product
     private string $priceAmount;
 
     #[ORM\Column(type: 'datetime', nullable: false)]
-    private \DateTimeInterface $createdAt;
+    private DateTimeInterface $createdAt;
 
     public function __construct(string $id, string $name, int $price)
     {
         $this->id = Uuid::fromString($id);
         $this->name = $name;
         $this->priceAmount = $price;
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): string
@@ -46,7 +48,8 @@ class Product implements \App\Service\Catalog\Product
      * @param non-empty-string $name
      * @return $this
      */
-    public function setName(string $name): self {
+    public function setName(string $name): self
+    {
         $this->name = $name;
         return $this;
     }
@@ -62,7 +65,8 @@ class Product implements \App\Service\Catalog\Product
      * @param int $price
      * @return $this
      */
-    public function setPrice(int $price): self {
+    public function setPrice(int $price): self
+    {
         $this->priceAmount = $price;
         return $this;
     }
@@ -70,19 +74,21 @@ class Product implements \App\Service\Catalog\Product
     /**
      * Gets the created date of the product.
      *
-     * @return \DateTimeInterface
+     * @return DateTimeInterface
      */
-    public function getCreatedAt(): \DateTimeInterface {
+    public function getCreatedAt(): DateTimeInterface
+    {
         return $this->createdAt;
     }
 
     /**
      * Sets created date of the product.
      *
-     * @param \DateTimeInterface $createdAt
+     * @param DateTimeInterface $createdAt
      * @return $this
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self {
+    public function setCreatedAt(DateTimeInterface $createdAt): self
+    {
         $this->createdAt = $createdAt;
         return $this;
     }

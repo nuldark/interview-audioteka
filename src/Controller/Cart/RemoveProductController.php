@@ -10,7 +10,6 @@ use App\Messenger\RemoveProductFromCart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/cart/{cart}/{product}", methods={"DELETE"}, name="cart-remove-product")
@@ -22,7 +21,7 @@ class RemoveProductController extends AbstractController implements MessageBusAw
     public function __invoke(Request $request, Cart $cart, ?Product $product): Response
     {
         if ($product !== null) {
-            $amount = (int) $request->get('amount', 1);
+            $amount = (int)$request->get('amount', 1);
             $this->dispatch(new RemoveProductFromCart($cart->getId(), $product->getId(), $amount));
         }
 

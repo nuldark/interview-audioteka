@@ -14,13 +14,6 @@ class CartBuilderTest extends TestCase
 {
     private CartBuilder $builder;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->builder = new CartBuilder();
-    }
-
     public function test_builds_cart_with_no_products(): void
     {
         $cart = new Cart('3db5f857-e5a3-4c8d-a262-37da156c0001');
@@ -54,5 +47,12 @@ class CartBuilderTest extends TestCase
                 ],
             ]
         ], $this->builder->__invoke($cart));
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->builder = new CartBuilder();
     }
 }
