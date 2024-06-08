@@ -8,6 +8,7 @@ use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
 use App\Messenger\RemoveProductFromCart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,10 +19,11 @@ class RemoveProductController extends AbstractController implements MessageBusAw
 {
     use MessageBusTrait;
 
-    public function __invoke(Cart $cart, ?Product $product): Response
+    public function __invoke(Request $request, Cart $cart, ?Product $product): Response
     {
         if ($product !== null) {
-            $this->dispatch(new RemoveProductFromCart($cart->getId(), $product->getId()));
+            $amount = (int) $request->get('amount', 1);
+            $this->dispatch(new RemoveProductFromCart($cart->getId(), $product->getId(), $amount));
         }
 
         return new Response('', Response::HTTP_ACCEPTED);

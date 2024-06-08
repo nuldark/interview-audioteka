@@ -12,6 +12,6 @@ class RemoveProductFromCartHandler implements MessageHandlerInterface
 
     public function __invoke(RemoveProductFromCart $command): void
     {
-        $this->service->removeProduct($command->cartId, $command->productId);
+        $this->service->removeProduct($command->cartId, $command->productId, $command->amount);
     }
 }

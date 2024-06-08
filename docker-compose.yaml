@@ -46,5 +46,13 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: audioteka-assignment
 
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+
 volumes:
   db-data:

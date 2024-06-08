@@ -13,7 +13,7 @@ Do uruchomienia wymagany jest `docker`
 Jeśli wszystko poszło dobrze, serwis powinien być dostępny pod adresem 
 [https://localhost](https://localhost).
 
-Przykładowe zapytania (jak komunikować się z serwisem) znajdziesz w [requests.http](./requests.http).
+Przykładowe zapytania (jak komunikować się z serwisem) znajdziesz w [requests.http](requests.http).
 
 Testy uruchamia polecenie `docker compose run --rm php php bin/phpunit`
 
@@ -35,8 +35,8 @@ Kod, który masz przed sobą, stara się implementować te wymagania z pomocą `
 
 Użytkownicy i testerzy serwisu zgłosili następujące problemy i prośby:
 
-- [ ] Chcemy móc dodawać do koszyka ten sam produkt kilka razy, o ile nie zostanie przekroczony sumaryczny limit sztuk produktów. Teraz to nie działa.
-- [ ] Limit koszyka nie zawsze działa. Wprawdzie, gdy podczas naszych testów dodajemy czwarty produkt do koszyka to dostajemy komunikat `Cart is full.`, ale pomimo tego i tak niektóre koszyki w bazie danych mają po cztery produkty. 
+- [x] Chcemy móc dodawać do koszyka ten sam produkt kilka razy, o ile nie zostanie przekroczony sumaryczny limit sztuk produktów. Teraz to nie działa.
+- [x] Limit koszyka nie zawsze działa. Wprawdzie, gdy podczas naszych testów dodajemy czwarty produkt do koszyka to dostajemy komunikat `Cart is full.`, ale pomimo tego i tak niektóre koszyki w bazie danych mają po cztery produkty. 
 - [x] Najnowsze (ostatnio dodane) produkty powinny być dostępne na początkowych stronach listy produktów. 
 - [x] Musimy mieć możliwość edycji produktów. Czasami w nazwach są literówki, innym razem cena jest nieaktualna.
 
