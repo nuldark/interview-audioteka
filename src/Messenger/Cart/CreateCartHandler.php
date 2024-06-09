@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Messenger;
+namespace App\Messenger\Cart;
 
+use App\Service\Cart\Cart;
 use App\Service\Cart\CartService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 #[AsMessageHandler]
-class RemoveProductFromCartHandler implements MessageHandlerInterface
+class CreateCartHandler implements MessageHandlerInterface
 {
     public function __construct(private CartService $service)
     {
     }
 
-    public function __invoke(RemoveProductFromCart $command): void
+    public function __invoke(CreateCart $command): Cart
     {
-        $this->service->removeProduct($command->cartId, $command->productId, $command->amount);
+        return $this->service->create();
     }
 }

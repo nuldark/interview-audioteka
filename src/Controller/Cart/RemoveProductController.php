@@ -4,9 +4,9 @@ namespace App\Controller\Cart;
 
 use App\Entity\Cart;
 use App\Entity\Product;
+use App\Messenger\Cart\RemoveProductFromCart;
 use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
-use App\Messenger\RemoveProductFromCart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

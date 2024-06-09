@@ -3,9 +3,9 @@
 namespace App\Controller\Catalog;
 
 use App\Entity\Product;
+use App\Messenger\Catalog\RemoveProductFromCatalog;
 use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
-use App\Messenger\RemoveProductFromCatalog;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

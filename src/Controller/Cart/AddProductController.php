@@ -4,7 +4,7 @@ namespace App\Controller\Cart;
 
 use App\Entity\Cart;
 use App\Entity\Product;
-use App\Messenger\AddProductToCart;
+use App\Messenger\Cart\AddProductToCart;
 use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
 use App\ResponseBuilder\ErrorBuilder;

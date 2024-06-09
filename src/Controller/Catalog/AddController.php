@@ -2,7 +2,7 @@
 
 namespace App\Controller\Catalog;
 
-use App\Messenger\AddProductToCatalog;
+use App\Messenger\Catalog\AddProductToCatalog;
 use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
 use App\ResponseBuilder\ErrorBuilder;

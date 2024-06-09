@@ -3,9 +3,9 @@
 namespace App\Controller\Catalog;
 
 use App\Entity\Product;
+use App\Messenger\Catalog\UpdateProduct;
 use App\Messenger\MessageBusAwareInterface;
 use App\Messenger\MessageBusTrait;
-use App\Messenger\UpdateProduct;
 use App\ResponseBuilder\ErrorBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

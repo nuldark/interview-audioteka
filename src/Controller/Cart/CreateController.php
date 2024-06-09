@@ -2,7 +2,7 @@
 
 namespace App\Controller\Cart;
 
-use App\Messenger\CreateCart;
+use App\Messenger\Cart\CreateCart;
 use App\Service\Cart\Cart;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
