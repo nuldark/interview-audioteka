@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\CartProduct;
+use App\Entity\Product;
 use App\Service\Cart\Cart;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,7 +24,7 @@ final class CartRepository implements CartService
     public function addProduct(string $cartId, string $productId, int $amount): void
     {
         $cart = $this->entityManager->find(\App\Entity\Cart::class, $cartId);
-        $product = $this->entityManager->find(\App\Entity\Product::class, $productId);
+        $product = $this->entityManager->find(Product::class, $productId);
 
         $cartProduct = $this->entityManager->getRepository(CartProduct::class)
             ->findOneBy([
@@ -52,7 +53,7 @@ final class CartRepository implements CartService
     public function removeProduct(string $cartId, string $productId, int $amount): void
     {
         $cart = $this->entityManager->find(\App\Entity\Cart::class, $cartId);
-        $product = $this->entityManager->find(\App\Entity\Product::class, $productId);
+        $product = $this->entityManager->find(Product::class, $productId);
 
         if ($cart->hasProduct($product)) {
             $cart->removeProduct($product, $amount);
