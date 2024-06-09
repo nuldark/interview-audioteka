@@ -14,11 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use function trim;
 
-#[Route(
-    path: '/products/{product}/update',
-    name: 'product-update',
-    methods: ['PATCH'],
-)]
+#[Route(path: '/products/{product}/update', name: 'product-update', methods: ['PATCH'])]
 class UpdateController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;

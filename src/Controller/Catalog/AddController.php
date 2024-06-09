@@ -10,10 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/products", methods={"POST"}, name="product-add")
- */
+#[Route(path: '/products', name: 'product-add', methods: ['POST'])]
 class AddController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;

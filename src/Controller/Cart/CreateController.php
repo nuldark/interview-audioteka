@@ -10,10 +10,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/cart", methods={"POST"}, name="cart-create")
- */
+#[Route(path: '/cart', name: 'cart-create', methods: ['POST'])]
 class CreateController extends AbstractController
 {
     use HandleTrait;

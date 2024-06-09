@@ -8,10 +8,9 @@ use App\Messenger\MessageBusTrait;
 use App\Messenger\RemoveProductFromCatalog;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/products/{product}", methods={"DELETE"}, name="product-delete")
- */
+#[Route(path: '/products/{product}', name: 'product-add', methods: ['DELETE'])]
 class RemoveController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;

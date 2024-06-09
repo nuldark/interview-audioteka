@@ -12,10 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/cart/{cart}/{product}", methods={"PUT"}, name="cart-add-product")
- */
+#[Route(path: '/cart/{cart}/{product}', name: 'cart-add-product', methods: ['PUT'])]
 class AddProductController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;
