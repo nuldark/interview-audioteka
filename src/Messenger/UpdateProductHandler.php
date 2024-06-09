@@ -3,8 +3,10 @@
 namespace App\Messenger;
 
 use App\Service\Catalog\ProductService;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
+#[AsMessageHandler]
 final class UpdateProductHandler implements MessageHandlerInterface
 {
     public function __construct(
