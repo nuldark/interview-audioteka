@@ -11,14 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/products/{product}', name: 'product-add', methods: ['DELETE'])]
-class RemoveController extends AbstractController implements MessageBusAwareInterface
+final class RemoveController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;
 
     public function __invoke(?Product $product): Response
     {
         if ($product !== null) {
-            $this->dispatch(new RemoveProductFromCatalog($product->getId()));
+            $this->dispatch(new RemoveProductFromCatalog($product));
         }
 
         return new Response('', Response::HTTP_ACCEPTED);

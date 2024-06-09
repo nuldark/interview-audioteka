@@ -9,15 +9,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Ramsey\Uuid\Uuid;
 
-class ProductRepository implements ProductProvider, ProductService
+final class ProductRepository implements ProductProvider, ProductService
 {
     private EntityRepository $repository;
 
-    public function __construct(private EntityManagerInterface $entityManager)
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    )
     {
         $this->repository = $this->entityManager->getRepository(\App\Entity\Product::class);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getProducts(int $page = 0, int $count = 3): iterable
     {
         return $this->repository->createQueryBuilder('p')
@@ -28,16 +33,28 @@ class ProductRepository implements ProductProvider, ProductService
             ->getResult();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getTotalCount(): int
     {
-        return $this->repository->createQueryBuilder('p')->select('count(p.id)')->getQuery()->getSingleScalarResult();
+        return $this->repository->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function exists(string $productId): bool
     {
         return $this->repository->find($productId) !== null;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function add(string $name, int $price): Product
     {
         $product = new \App\Entity\Product(Uuid::uuid4(), $name, $price);
@@ -48,18 +65,21 @@ class ProductRepository implements ProductProvider, ProductService
         return $product;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function update(Product $product): void
     {
         $this->entityManager->persist($product);
         $this->entityManager->flush();
     }
 
-    public function remove(string $id): void
+    /**
+     * @inheritDoc
+     */
+    public function remove(Product $product): void
     {
-        $product = $this->repository->find($id);
-        if ($product !== null) {
-            $this->entityManager->remove($product);
-            $this->entityManager->flush();
-        }
+        $this->entityManager->remove($product);
+        $this->entityManager->flush();
     }
 }

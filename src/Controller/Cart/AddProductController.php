@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/cart/{cart}/{product}', name: 'cart-add-product', methods: ['PUT'])]
-class AddProductController extends AbstractController implements MessageBusAwareInterface
+final class AddProductController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;
 

@@ -13,11 +13,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/cart', name: 'cart-create', methods: ['POST'])]
-class CreateController extends AbstractController
+final class CreateController extends AbstractController
 {
     use HandleTrait;
 
-    public function __construct(private CartService $cartService, MessageBusInterface $messageBus)
+    public function __construct(
+        private readonly CartService $cartService,
+        MessageBusInterface          $messageBus
+    )
     {
         $this->messageBus = $messageBus;
     }

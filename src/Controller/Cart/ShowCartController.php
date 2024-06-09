@@ -10,9 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/cart/{cart}', name: 'cart-show', methods: ['GET'])]
-class ShowCartController extends AbstractController
+final class ShowCartController extends AbstractController
 {
-    public function __construct(private CartBuilder $cartBuilder)
+    public function __construct(
+        private readonly CartBuilder $cartBuilder
+    )
     {
     }
 

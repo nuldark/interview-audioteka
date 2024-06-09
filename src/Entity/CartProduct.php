@@ -13,7 +13,7 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\ManyToOne(targetEntity: Cart::class, cascade: ['persist'], inversedBy: 'products')]
+    #[ORM\ManyToOne(targetEntity: Cart::class, cascade: ['persist', 'remove'], inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private Cart $cart;
 
@@ -22,9 +22,9 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
     private Product $product;
 
     #[ORM\Column(type: 'integer')]
-    private int $amount = 1;
+    private int $amount;
 
-    public function __construct(Cart $cart, Product $product, int $amount)
+    public function __construct(Cart $cart, Product $product, int $amount = 1)
     {
         $this->cart = $cart;
         $this->product = $product;
@@ -57,11 +57,18 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
         return $this;
     }
 
-    public function equals(Product $product): bool
+    /**
+     * @param \App\Service\Catalog\Product $product
+     * @return bool
+     */
+    public function equals(\App\Service\Catalog\Product $product): bool
     {
         return $product->getId() === $this->getProduct()->getId();
     }
 
+    /**
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
@@ -73,7 +80,7 @@ class CartProduct implements \App\Service\CartProduct\CartProduct
         return $this;
     }
 
-    public function getProduct(): Product
+    public function getProduct(): \App\Service\Catalog\Product
     {
         return $this->product;
     }

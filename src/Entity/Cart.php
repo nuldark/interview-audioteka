@@ -18,7 +18,7 @@ class Cart implements \App\Service\Cart\Cart
     #[ORM\Column(type: 'uuid', nullable: false)]
     private UuidInterface $id;
 
-    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartProduct::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartProduct::class)]
     private Collection $products;
 
     public function __construct(string $id)
@@ -27,18 +27,27 @@ class Cart implements \App\Service\Cart\Cart
         $this->products = new ArrayCollection();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getId(): string
     {
         return $this->id->toString();
     }
 
-    public function addProduct(Product $product, int $amount = 1): self
+    /**
+     * @inheritDoc
+     */
+    public function addProduct(\App\Service\Catalog\Product $product, int $amount = 1): self
     {
         $this->products->add(new CartProduct($this, $product, $amount));
         return $this;
     }
 
-    public function removeProduct(Product $product, int $amount = 1): self
+    /**
+     * @inheritDoc
+     */
+    public function removeProduct(\App\Service\Catalog\Product $product, int $amount = 1): self
     {
         $this->products
             ->filter(static fn(CartProduct $cartProduct) => $cartProduct->equals($product))
@@ -53,7 +62,10 @@ class Cart implements \App\Service\Cart\Cart
         return $this;
     }
 
-    public function hasProduct(Product $product): bool
+    /**
+     * @inheritDoc
+     */
+    public function hasProduct(\App\Service\Catalog\Product $product): bool
     {
         foreach ($this->products as $cartProduct) {
             if ($cartProduct->equals($product)) {
@@ -64,6 +76,9 @@ class Cart implements \App\Service\Cart\Cart
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getTotalPrice(): int
     {
         return array_reduce(
@@ -73,11 +88,17 @@ class Cart implements \App\Service\Cart\Cart
         );
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getProducts(): array
     {
         return $this->products->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isFull(?int $amount = null): bool
     {
         return array_reduce(

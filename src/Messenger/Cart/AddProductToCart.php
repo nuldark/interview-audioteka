@@ -2,9 +2,13 @@
 
 namespace App\Messenger\Cart;
 
-class AddProductToCart
+final class AddProductToCart
 {
-    public function __construct(public readonly string $cartId, public readonly string $productId, public readonly int $amount)
+    public function __construct(
+        public readonly string    $cartId,
+        public readonly string $productId,
+        public readonly int     $amount
+    )
     {
     }
 }

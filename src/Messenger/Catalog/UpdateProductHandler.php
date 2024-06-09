@@ -16,6 +16,10 @@ final class UpdateProductHandler implements MessageHandlerInterface
 
     }
 
+    /**
+     * @param UpdateProduct $command
+     * @return void
+     */
     public function __invoke(UpdateProduct $command): void
     {
         $this->productService->update($command->product);

@@ -5,9 +5,11 @@ namespace App\ResponseBuilder;
 use App\Service\Catalog\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ProductListBuilder
+final class ProductListBuilder
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(
+        private readonly UrlGeneratorInterface $urlGenerator
+    )
     {
     }
 

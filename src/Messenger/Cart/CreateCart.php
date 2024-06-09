@@ -2,6 +2,6 @@
 
 namespace App\Messenger\Cart;
 
-class CreateCart
+final class CreateCart
 {
 }

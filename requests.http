@@ -31,11 +31,11 @@ POST https://localhost/cart
 PUT https://localhost/cart/{{cart_id}}/545ca524-ea28-4cf7-9f97-fb53452cf3b7
 Content-Type: application/x-www-form-urlencoded
 
-amount=1
+amount=2
 
 ### Remove product from cart
 
-DELETE https://localhost/cart/{{cart_id}}/119435f1-b1e7-43bd-9d87-5f06f32da67f
+DELETE https://localhost/cart/{{cart_id}}/545ca524-ea28-4cf7-9f97-fb53452cf3b7
 Content-Type: application/x-www-form-urlencoded
 
 amount=1

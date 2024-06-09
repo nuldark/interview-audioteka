@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/cart/{cart}/{product}', name: 'cart-remove-product', methods: ['DELETE'])]
-class RemoveProductController extends AbstractController implements MessageBusAwareInterface
+final class RemoveProductController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;
 

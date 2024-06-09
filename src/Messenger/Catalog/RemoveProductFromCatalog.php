@@ -2,9 +2,13 @@
 
 namespace App\Messenger\Catalog;
 
-class RemoveProductFromCatalog
+use App\Service\Catalog\Product;
+
+final class RemoveProductFromCatalog
 {
-    public function __construct(public readonly string $productId)
+    public function __construct(
+        public readonly Product $product
+    )
     {
     }
 }

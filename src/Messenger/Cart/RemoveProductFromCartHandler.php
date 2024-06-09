@@ -7,14 +7,22 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 #[AsMessageHandler]
-class RemoveProductFromCartHandler implements MessageHandlerInterface
+final class RemoveProductFromCartHandler implements MessageHandlerInterface
 {
-    public function __construct(private CartService $service)
+    public function __construct(private readonly CartService $service)
     {
     }
 
+    /**
+     * @param RemoveProductFromCart $command
+     * @return void
+     */
     public function __invoke(RemoveProductFromCart $command): void
     {
-        $this->service->removeProduct($command->cartId, $command->productId, $command->amount);
+        $this->service->removeProduct(
+            $command->cartId,
+            $command->productId,
+            $command->amount
+        );
     }
 }

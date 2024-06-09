@@ -13,11 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/products', name: 'product-add', methods: ['POST'])]
-class AddController extends AbstractController implements MessageBusAwareInterface
+final class AddController extends AbstractController implements MessageBusAwareInterface
 {
     use MessageBusTrait;
 
-    public function __construct(private ErrorBuilder $errorBuilder)
+    public function __construct(
+        private readonly ErrorBuilder $errorBuilder
+    )
     {
     }
 
